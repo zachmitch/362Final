@@ -28,6 +28,9 @@ public class UrlValidatorTest extends TestCase {
 	   
 	   UrlValidator v2 = new UrlValidator(UrlValidator.ALLOW_ALL_SCHEMES);
 	   System.out.println(v2.isValid("file://picture.jpg"));
+	   System.out.println(v2.isValid("http://yes/this/works")); 
+	   System.out.println(v2.isValid("http://www.google.com/main/subdir")); 
+
    }
    
    
