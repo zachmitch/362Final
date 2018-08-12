@@ -102,10 +102,54 @@ public class UrlValidatorTest extends TestCase {
 
   }
    
-   
+  
+
+ 
    public void testIsValid()
    {
 	   //You can use this function for programming based testing
+
+	Random rand = new Random();
+	UrlValidator urlVal = new UrlValidator();
+	UrlValidator urlVal2 = new UrlValidator(UrlValidator.ALLOW_ALL_SCHEMES);
+		
+	String[] protocols = {"http://", "HTTP://", "https://", "HTTPS://", "telnet://", "ssl://", "ssh://", "ssn://", "ftp://"};
+	String[] domains = { "google", "apple", "reddit"};
+	String[] tlds = {".com",".net",".super", ".html", ".44", ".-()*^*&", ".^^", ".io", ".co"};
+	String[] paths = {"/somepath", "/main/subdir", "/~main", "", "/apple.php", "/septermber/octerber/novermber", "\\/","/99"  };
+	String[] ports = {":80",":443",":-8",":186587384", "", "", ""};
+
+		
+		int i, rand1, rand2, rand3, rand4, rand5, rand6;
+		
+		for( i = 0; i < 100; i++) {
+		
+			rand1 = rand(1); //Random on flags	
+			rand2 = rand(8); //protocols	
+			rand3 = rand(2); // domains	
+			rand4 = rand(8); //tlds	
+			rand5 = rand(7); // paths	
+			rand6 = rand(6); // ports	
+	
+			//Create a URL to test
+			String passedUrl = protocols[rand2] + domains[rand3] + tlds[rand4] + ports[rand5] + paths[rand6];
+		
+			// Runs with Allow_all_schemes flag if true
+			boolean rez
+			if(rand1) {
+				rez = urlVal2.isValid(passedUrl);
+			} else {
+				rez = urlVal.isValid(passedUrl);
+			}	
+		
+			//Print to user test and result			
+			System.out.println("Testing: " + passedUrl + ", Result: " + rez);
+			
+		}
+		
+		
+
+
 
    }
    
